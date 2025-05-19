@@ -10,30 +10,19 @@
     <link href="/assets/bootstrap/css/bootstrap-utilities.min.css" rel="stylesheet" />
 </head>
 <body>
-
-
-
     <h1>Test</h1>
     <div ng-app="MyApp">
        <div ng-controller="AppController as vm">
           <div class="container">
-	          <div class="row">
-	             <div class="col">
-	                <uib-accordion close-others="vm.oneAtATime">
-	                   <div uib-accordion-group class="mt-1" heading="Sample Item 1" is-open="vm.status.isFirstOpen" is-disabled="vm.status.isFirstDisabled">
-	                      This content is straight in the template.
-	                   </div>
-	                   <div uib-accordion-group class="mt-1" heading="Sample Item 2" is-open="vm.status2.isFirstOpen" is-disabled="vm.status2.isFirstDisabled">
-                         This content is straight in the template 2.
-                      </div>
-	                </uib-accordion>
-	             </div>
-	          </div>
+             <div class="row">
+                <div class="col">
+                   <p>{{ vm.testVal }}</p>
+                </div>
+             </div>
           </div>
        </div>
     </div>
-    
-    
+        
     <script src="/assets/jquery/js/jquery-3.7.1.min.js" type="text/javascript"></script>
     <script src="/assets/bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     <script src="/assets/angularjs/js/angular.min.js" type="text/javascript"></script>
