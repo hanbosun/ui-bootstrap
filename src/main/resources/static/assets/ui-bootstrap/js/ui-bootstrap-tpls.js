@@ -1,10 +1,14 @@
 /*
- * ui-bootstrap4
- * http://morgul.github.io/ui-bootstrap4/
-
- * Version: 3.0.6 - 2018-11-17
+ * ui-bootstrap 5.0.1
+ *
+ * Version: 5.0.1 - 2018-11-17
  * License: MIT
- */angular.module("ui.bootstrap", ["ui.bootstrap.tpls", "ui.bootstrap.collapse","ui.bootstrap.tabindex","ui.bootstrap.accordion","ui.bootstrap.alert","ui.bootstrap.buttons","ui.bootstrap.carousel","ui.bootstrap.common","ui.bootstrap.dateparser","ui.bootstrap.isClass","ui.bootstrap.datepicker","ui.bootstrap.position","ui.bootstrap.datepickerPopup","ui.bootstrap.debounce","ui.bootstrap.multiMap","ui.bootstrap.dropdown","ui.bootstrap.stackedMap","ui.bootstrap.modal","ui.bootstrap.paging","ui.bootstrap.pager","ui.bootstrap.pagination","ui.bootstrap.tooltip","ui.bootstrap.popover","ui.bootstrap.progressbar","ui.bootstrap.rating","ui.bootstrap.tabs","ui.bootstrap.timepicker","ui.bootstrap.typeahead"]);
+ * 
+ * 
+ * Note: The work is done so that this file is 100% compatible with bootstrap 5.3
+ * Start-Date: 05/14/2025
+ */
+angular.module("ui.bootstrap", ["ui.bootstrap.tpls", "ui.bootstrap.collapse","ui.bootstrap.tabindex","ui.bootstrap.accordion","ui.bootstrap.alert","ui.bootstrap.buttons","ui.bootstrap.carousel","ui.bootstrap.common","ui.bootstrap.dateparser","ui.bootstrap.isClass","ui.bootstrap.datepicker","ui.bootstrap.position","ui.bootstrap.datepickerPopup","ui.bootstrap.debounce","ui.bootstrap.multiMap","ui.bootstrap.dropdown","ui.bootstrap.stackedMap","ui.bootstrap.modal","ui.bootstrap.paging","ui.bootstrap.pager","ui.bootstrap.pagination","ui.bootstrap.tooltip","ui.bootstrap.popover","ui.bootstrap.progressbar","ui.bootstrap.rating","ui.bootstrap.tabs","ui.bootstrap.timepicker","ui.bootstrap.typeahead"]);
 angular.module("ui.bootstrap.tpls", ["uib/template/accordion/accordion-group.html","uib/template/accordion/accordion.html","uib/template/alert/alert.html","uib/template/carousel/carousel.html","uib/template/carousel/slide.html","uib/template/datepicker/datepicker.html","uib/template/datepicker/day.html","uib/template/datepicker/month.html","uib/template/datepicker/year.html","uib/template/datepickerPopup/popup.html","uib/template/modal/window.html","uib/template/pager/pager.html","uib/template/pagination/pagination.html","uib/template/tooltip/tooltip-html-popup.html","uib/template/tooltip/tooltip-popup.html","uib/template/tooltip/tooltip-template-popup.html","uib/template/popover/popover-html.html","uib/template/popover/popover-template.html","uib/template/popover/popover.html","uib/template/progressbar/bar.html","uib/template/progressbar/progress.html","uib/template/progressbar/progressbar.html","uib/template/rating/rating.html","uib/template/tabs/tab.html","uib/template/tabs/tabset.html","uib/template/timepicker/timepicker.html","uib/template/typeahead/typeahead-match.html","uib/template/typeahead/typeahead-popup.html"]);
 angular.module('ui.bootstrap.collapse', [])
 
@@ -193,6 +197,8 @@ angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse', 'ui.bootstrap
       this.groups.splice(index, 1);
     }
   };
+  
+  $scope.ctrlId = 'accordionctrl-' + $scope.$id + '-' + Math.floor(Math.random() * 10000); 
 }])
 
 // The accordion directive simply sets up the directive controller
@@ -229,13 +235,13 @@ angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse', 'ui.bootstrap
       };
     },
     link: function(scope, element, attrs, accordionCtrl) {
-      element.addClass('card');
+      //element.addClass('card');
       accordionCtrl.addGroup(scope);
 
-      scope.openClass = attrs.openClass || 'card-open';
-      scope.cardClass = attrs.cardClass || 'card-default';
+      //scope.openClass = attrs.openClass || 'card-open';
+      //scope.cardClass = attrs.cardClass || 'card-default';
       scope.$watch('isOpen', function(value) {
-        element.toggleClass(scope.openClass, !!value);
+        //element.toggleClass(scope.openClass, !!value);
         if (value) {
           accordionCtrl.closeOthers(scope);
         }
@@ -252,6 +258,9 @@ angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse', 'ui.bootstrap
       var id = 'accordiongroup-' + scope.$id + '-' + Math.floor(Math.random() * 10000);
       scope.headingId = id + '-tab';
       scope.cardId = id + '-card';
+      if (scope.$parent.closeOthers) {
+         scope.parentId = scope.$parent.ctrlId;
+      }
     }
   };
 })
@@ -7491,7 +7500,8 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.debounce', 'ui.bootstrap
 
 angular.module("uib/template/accordion/accordion-group.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("uib/template/accordion/accordion-group.html",
-    "<div role=\"tab\" id=\"{{::headingId}}\" aria-selected=\"{{isOpen}}\" class=\"card-header\" ng-keypress=\"toggleOpen($event)\">\n" +
+    /* Disabled old uib code */
+    /*"<div role=\"tab\" id=\"{{::headingId}}\" aria-selected=\"{{isOpen}}\" class=\"card-header\" ng-keypress=\"toggleOpen($event)\">\n" +
     "  <h5 class=\"mb-0\">\n" +
     "    <a role=\"button\" data-toggle=\"collapse\" href aria-expanded=\"{{isOpen}}\" aria-controls=\"{{::cardId}}\" tabindex=\"0\" class=\"accordion-toggle\"  ng-click=\"toggleOpen()\" uib-accordion-transclude=\"heading\" ng-disabled=\"isDisabled\" uib-tabindex-toggle><span uib-accordion-header ng-class=\"{'text-muted': isDisabled}\">{{heading}}</span></a>\n" +
     "  </h5>\n" +
@@ -7499,13 +7509,49 @@ angular.module("uib/template/accordion/accordion-group.html", []).run(["$templat
     "<div id=\"{{::cardId}}\" aria-labelledby=\"{{::headingId}}\" aria-hidden=\"{{!isOpen}}\" role=\"tabcard\" class=\"card-collapse collapse\" uib-collapse=\"!isOpen\">\n" +
     "  <div class=\"card-body\" ng-transclude></div>\n" +
     "</div>\n" +
-    "");
+    ""*/
+    
+    /* New code that works with boostrap 5.3 */
+    `
+    <div class="accordion-item">
+       <h2 class="accordion-header">
+          <button class="accordion-button"
+                  ng-class="{'collapsed': !isOpen}"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#{{::headingId}}"
+                  aria-expanded="{{isOpen}}"
+                  aria-controls="{{::headingId}}"
+                  ng-disabled="isDisabled"
+                  ng-click="toggleOpen()"
+                  uib-tabindex-toggle>
+             {{heading}}
+          </button>
+       </h2>
+       <div id="{{::headingId}}"
+            class="accordion-collapse collapse"
+            ng-class="{'show': isOpen}"
+            data-bs-parent="#{{::parentId}}">
+          <div class="accordion-body" ng-transclude></div>
+       </div>
+    </div>
+    `
+  );
 }]);
 
 angular.module("uib/template/accordion/accordion.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("uib/template/accordion/accordion.html",
-    "<div role=\"tablist\" ng-transclude></div>\n" +
-    "");
+    /* Disabled old uib code */
+    /*"<div role=\"tablist\" ng-transclude></div>\n" +
+    ""*/
+    
+    /* New code that works with boostrap 5.3 */
+    `
+    <div class="accordion"
+         id="{{::ctrlId}}"
+         ng-transclude>
+    </div>
+  `);
 }]);
 
 angular.module("uib/template/alert/alert.html", []).run(["$templateCache", function ($templateCache) {

@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Han's UI-Bootstrap Fixes</title>
+    
+    <link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assets/bootstrap/css/bootstrap-utilities.min.css" rel="stylesheet" />
+</head>
+<body>
+    <h3>UI-Bootstrap Accordion Test</h3>
+    <div ng-app="MyApp">
+       <div ng-controller="AppController as vm">
+          <div class="container">
+             <div class="row">
+                <div class="col">
+                   <div class="form-check">
+                      <input class="form-check-input" type="checkbox" ng-model="vm.oneAtATime" id="chkbox_allowOneAtTime">
+                      <label class="form-check-label" for="chkbox_allowOneAtTime">
+                         Allow One At a Time
+                      </label>
+                   </div>
+                   <uib-accordion close-others="vm.oneAtATime">
+                      <div uib-accordion-group heading="{{student.studentName}}"
+                           is-open="student.visible"
+                           is-disabled="!student.active"
+                           ng-repeat="student in vm.itemsToDisplay">
+                           <div class="row">
+                              <div class="col">
+                                 <b>Student Name:</b> {{student.studentName}}
+                              </div>
+                              <div class="col d-flex justify-content-end">
+                                 <button class="btn btn-primary btn-sm"
+                                         ng-click="vm.collapseDisplay(student)">Collapse</button>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col">
+                                 <b>Age:</b> {{student.age}}
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col">
+                                 <b>Gender:</b> {{student.gender}}
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col">
+                                 <b>Level:</b> {{student.level}}
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col">
+											<table class="table table-striped">
+											   <tr>
+											       <th>Course</th>
+											       <th>Grade</th>
+											   </tr>
+											   <tr ng-repeat="course in student.classes">
+											       <td>{{course.className}}</td>
+                                        <td>{{course.grade}}</td>
+											   </tr>
+											</table>
+                              </div>
+                           </div>
+                      </div>
+                   </uib-accordion>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+        
+    <script src="/assets/jquery/js/jquery-3.7.1.min.js" type="text/javascript"></script>
+    <script src="/assets/bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <script src="/assets/angularjs/js/angular.min.js" type="text/javascript"></script>
+    <script src="/assets/angularjs/js/angular-resource.min.js" type="text/javascript"></script>
+    <script src="/assets/angularjs/js/angular-route.min.js" type="text/javascript"></script>
+    <script src="/assets/ui-bootstrap/js/ui-bootstrap-tpls.js" type="text/javascript"></script>
+    <script src="/assets/app/js/accordion-test.js" type="text/javascript"></script>
+</body>
+</html>
