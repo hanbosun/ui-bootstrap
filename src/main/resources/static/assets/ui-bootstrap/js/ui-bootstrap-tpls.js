@@ -7556,12 +7556,30 @@ angular.module("uib/template/accordion/accordion.html", []).run(["$templateCache
 
 angular.module("uib/template/alert/alert.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("uib/template/alert/alert.html",
-    "<button ng-show=\"closeable\" type=\"button\" class=\"close\" ng-click=\"close({$event: $event})\">\n" +
+    /*"<button ng-show=\"closeable\" type=\"button\" class=\"close\" ng-click=\"close({$event: $event})\">\n" +
     "  <span aria-hidden=\"true\">&times;</span>\n" +
     "  <span class=\"sr-only\">Close</span>\n" +
     "</button>\n" +
     "<div ng-transclude></div>\n" +
-    "");
+    ""*/
+    `
+    <div class="row">
+       <div class="col">
+          <div ng-transclude></div>
+       </div>
+       <div class="col d-flex justify-content-end" style="padding-right: 0px; margin-right: 0px;">
+          <button ng-if="closeable"
+                  type="button"
+                  class="btn btn-default"
+                  ng-click="close({$event: $event})"
+                  data-bs-dismiss="alert"
+                  style="--bs-btn-padding-y: .05rem; --bs-btn-padding-x: .05rem; --bs-btn-font-size: 1rem;">
+             <span aria-hidden="true">&times;</span>
+          </button>
+       </div>
+    </div>
+    `
+  );
 }]);
 
 angular.module("uib/template/carousel/carousel.html", []).run(["$templateCache", function ($templateCache) {
