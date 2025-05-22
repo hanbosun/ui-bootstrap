@@ -10,18 +10,40 @@
     <link href="/assets/bootstrap/css/bootstrap-utilities.min.css" rel="stylesheet" />
 </head>
 <body>
-    <h3>UI-Bootstrap Accordion Test</h3>
+    <h3>UI-Bootstrap Alert Test</h3>
     <div ng-app="MyApp">
        <div ng-controller="AppController as vm">
           <div class="container">
              <div class="row">
                 <div class="col">
                    <h4>Single Alert</h4>
-                   <div uib-alert ng-class="'alert-' + (vm.alertSttle || 'info')" close="vm.closeAlert()">
-                      {{vm.warningMessage}}
+                   <div uib-alert ng-repeat="alert in vm.alerts" ng-class="'alert-' + (alert.alertStyle || 'info')" close="vm.closeAlert(0)">
+                      {{alert.statusMessage}}
                    </div>
                 </div>
              </div>
+             <form>
+             <div class="row mb-2">
+                <div class="col-8">
+                   <label>Select Alert Style:</label>
+                   <select class="form-select" ng-model="vm.alertStyle">
+                       <option value="danger">Danger</option>
+                       <option value="info">Info</option>
+                       <option value="success">Success</option>
+                       <option value="warning">Warning</option>
+                   </select>
+                </div>
+             </div>             
+             <div class="row">
+                <div class="col-8">
+                   <input type="text" ng-model="vm.warningMessage" class="form-control"/>
+                </div>
+                <div class="col-4">
+                   <button class="btn btn-primary me-2" ng-click="vm.addAlert()">Display Alert</button>
+                   <button class="btn btn-danger" ng-click="vm.removeAlert()">Clear</button>                   
+                </div>
+             </div>
+             </form>
           </div>
        </div>
     </div>

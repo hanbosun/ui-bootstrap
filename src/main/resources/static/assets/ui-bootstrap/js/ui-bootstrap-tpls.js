@@ -7564,10 +7564,10 @@ angular.module("uib/template/alert/alert.html", []).run(["$templateCache", funct
     ""*/
     `
     <div class="row">
-       <div class="col">
+       <div class="col-11">
           <div ng-transclude></div>
        </div>
-       <div class="col d-flex justify-content-end" style="padding-right: 0px; margin-right: 0px;">
+       <div class="col-1 d-flex justify-content-end" style="padding-right: 0px; margin-right: 0px;">
           <button ng-if="closeable"
                   type="button"
                   class="btn btn-default"
