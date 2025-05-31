@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Han's UI-Bootstrap Fixes</title>
+    
+    <link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assets/bootstrap/css/bootstrap-utilities.min.css" rel="stylesheet" />
+</head>
+<body>
+    <h3>UI-Bootstrap Alert Test</h3>
+    <div ng-app="MyApp">
+       <div ng-controller="AppController as vm">
+          <div class="container">
+             <div class="row">
+                <div class="col">
+                   <div class="btn-group">
+					       <label class="btn btn-primary" ng-model="vm.checkModel.left" uib-btn-checkbox>Left</label>
+					       <label class="btn btn-primary" ng-model="vm.checkModel.middle" uib-btn-checkbox>Middle</label>
+					       <label class="btn btn-primary" ng-model="vm.checkModel.right" uib-btn-checkbox>Right</label>
+					    </div>
+                </div>
+             </div>
+             <div class="row mt-2">
+                <div class="col">
+                   <div class="card">
+                      <div class="card-body">
+                         Left: {{vm.checkModel.left}}
+                      </div>
+                   </div>
+                </div>
+                <div class="col">
+                   <div class="card">
+                      <div class="card-body">
+                         Middle: {{vm.checkModel.middle}}
+                      </div>
+                   </div>
+                </div>
+                <div class="col">
+                   <div class="card">
+                      <div class="card-body">
+                         Right: {{vm.checkModel.right}}
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="row mt-2">
+                <div class="col">
+                   <div class="btn-group">
+                      <label class="btn btn-outline-danger" ng-model="vm.optValSelected" uib-btn-radio="'Danger'">Danger</label>
+                      <label class="btn btn-outline-warning" ng-model="vm.optValSelected" uib-btn-radio="'Warning'">Warning</label>
+                      <label class="btn btn-outline-success" ng-model="vm.optValSelected" uib-btn-radio="'Safe'">Safe</label>
+                   </div>
+                </div>
+             </div>
+             <div class="row mt-2">
+                <div class="col-4">
+                   <div class="card">
+                      <div class="card-body">
+                         Light: {{ vm.optValSelected || '' }}
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+        
+    <script src="/assets/jquery/js/jquery-3.7.1.min.js" type="text/javascript"></script>
+    <script src="/assets/bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <script src="/assets/angularjs/js/angular.min.js" type="text/javascript"></script>
+    <script src="/assets/angularjs/js/angular-resource.min.js" type="text/javascript"></script>
+    <script src="/assets/angularjs/js/angular-route.min.js" type="text/javascript"></script>
+    <script src="/assets/ui-bootstrap/js/ui-bootstrap-tpls.js" type="text/javascript"></script>
+    <script src="/assets/app/js/buttongroup-test.js" type="text/javascript"></script>
+</body>
+</html>
